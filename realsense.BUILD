@@ -11,7 +11,9 @@ filegroup(
 cmake_external(
     name="realsense",
     lib_source=":all",
-    cache_entries={},
+    cache_entries={
+        "ENABLE_CCACHE": "OFF",
+    },
     shared_libraries=[
         "librealsense2-gl.so",
         "librealsense2.so"

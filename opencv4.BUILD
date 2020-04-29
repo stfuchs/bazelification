@@ -12,6 +12,7 @@ cmake_external(
     name="opencv",
     lib_source=":all",
     cache_entries={
+        "ENABLE_CCACHE": "OFF",
         "BUILD_opencv_apps"      : "OFF",
         "BUILD_opencv_calib3d"   : "ON",
         "BUILD_opencv_core"      : "ON",
