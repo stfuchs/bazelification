@@ -1,15 +1,25 @@
 name="bazelification"
 workspace(name=name)
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # CMake rule repository
-http_archive(
+# For now rules_foreign_cc does not have a released version. Therefore we
+# we need to use a git commit sha to lock versions.
+git_repository(
     name="rules_foreign_cc",
-    url="https://github.com/bazelbuild/rules_foreign_cc/archive/master.zip",
-    sha256="bcee8e145e75e14ff977935343cfa31d1259daab4414bea3348ac08f41303758",
-    strip_prefix="rules_foreign_cc-master",
+    remote="git@github.com:bazelbuild/rules_foreign_cc",
+    commit="8372f383cf7277a88762efe25d8cfee10ad27929",
 )
+
+#http_archive(
+#    name="rules_foreign_cc",
+#    url="https://github.com/bazelbuild/rules_foreign_cc/archive/master.zip",
+#    sha256="bcee8e145e75e14ff977935343cfa31d1259daab4414bea3348ac08f41303758",
+#    strip_prefix="rules_foreign_cc-master",
+#)
+
 load("@rules_foreign_cc//:workspace_definitions.bzl", "rules_foreign_cc_dependencies")
 rules_foreign_cc_dependencies()
 
